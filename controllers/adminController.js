@@ -43,7 +43,8 @@ exports.listKids = async (req, res) => {
   }
 };
 
-// ADMIN: deactivate/activate user
+// ADMIN:
+// deactivate/activate user
 exports.setUserStatus = async (req, res) => {
   try {
     const { id } = req.params;
