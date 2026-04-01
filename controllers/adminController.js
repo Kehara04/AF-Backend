@@ -21,7 +21,7 @@ exports.createAdmin = async (req, res) => {
       profilePic: req.file ? `/uploads/${req.file.filename}` : "",
     });
 
-    const verifyToken = jwt.sign({ email: admin.email }, process.env.SECRET_KEY, { expiresIn: "1h" });
+    const verifyToken = jwt.sign({ email: admin.email }, process.env.JWT_SECRET_KEY, { expiresIn: "1h" });
     await sendVerificationEmail(admin.email, verifyToken);
 
     res.status(201).json({
