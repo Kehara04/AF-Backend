@@ -11,7 +11,7 @@ const app = express();
 
 // ✅ CORS (allow all for now, restrict later)
 app.use(cors({
-  origin: "*",
+  origin: "https://miniminds-sandy.vercel.app",
   credentials: true
 }));
 
