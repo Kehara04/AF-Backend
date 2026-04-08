@@ -5,7 +5,7 @@ exports.createExperiment = async (req, res) => {
   try {
     const experimentData = { ...req.body };
     if (req.file) {
-      experimentData.image = req.file.filename;
+      experimentData.image = req.file.path;
     }
     if (experimentData.tools) {
       experimentData.tools = JSON.parse(experimentData.tools);
@@ -54,7 +54,7 @@ exports.updateExperiment = async (req, res) => {
   try {
     const updateData = { ...req.body };
     if (req.file) {
-      updateData.image = req.file.filename;
+      updateData.image = req.file.path;
     }
     if (updateData.tools) {
       updateData.tools = JSON.parse(updateData.tools);

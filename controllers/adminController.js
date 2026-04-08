@@ -18,10 +18,10 @@ exports.createAdmin = async (req, res) => {
       password: hashedPassword,
       role: "admin",
       name: name || "Admin",
-      profilePic: req.file ? `/uploads/${req.file.filename}` : "",
+      profilePic: req.file ? req.file.path : "",
     });
 
-    const verifyToken = jwt.sign({ email: admin.email }, process.env.JWT_SECRET_KEY, { expiresIn: "1h" });
+    const verifyToken = jwt.sign({ email: admin.email }, process.env.SECRET_KEY, { expiresIn: "1h" });
     await sendVerificationEmail(admin.email, verifyToken);
 
     res.status(201).json({
@@ -43,8 +43,7 @@ exports.listKids = async (req, res) => {
   }
 };
 
-// ADMIN:
-// deactivate/activate user
+// ADMIN: deactivate/activate user
 exports.setUserStatus = async (req, res) => {
   try {
     const { id } = req.params;

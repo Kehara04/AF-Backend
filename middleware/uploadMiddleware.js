@@ -1,10 +1,39 @@
 const multer = require("multer");
-const path = require("path");
+const { CloudinaryStorage } = require("multer-storage-cloudinary");
+const cloudinary = require("../config/cloudinary");
 
-const storage = multer.diskStorage({
-  destination: "uploads/",
-  filename: (req, file, cb) => cb(null, Date.now() + path.extname(file.originalname)),
+const storage = new CloudinaryStorage({
+  cloudinary,
+  params: async (req, file) => {
+    let folder = "mini-minds/misc";
+
+    if (file.fieldname === "profile_image") {
+      folder = "mini-minds/profile-pictures";
+    } else if (file.fieldname === "image") {
+      folder = "mini-minds/experiments";
+    }
+
+    return {
+      folder,
+      resource_type: "image",
+      allowed_formats: ["jpg", "jpeg", "png", "webp"],
+      public_id: `${Date.now()}-${file.originalname.split(".")[0]}`,
+    };
+  },
 });
 
-const upload = multer({ storage });
+const fileFilter = (req, file, cb) => {
+  if (file.mimetype.startsWith("image/")) {
+    cb(null, true);
+  } else {
+    cb(new Error("Only image files are allowed"), false);
+  }
+};
+
+const upload = multer({
+  storage,
+  fileFilter,
+  limits: { fileSize: 5 * 1024 * 1024 }, // 5MB
+});
+
 module.exports = upload;

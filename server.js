@@ -3,7 +3,6 @@ require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
-const path = require("path");
 
 const router = require("./router");
 
@@ -18,9 +17,6 @@ app.use(cors({
 // ✅ Middlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
-// ✅ Static files (uploads)
-app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 // ✅ Root route (IMPORTANT FIX)
 app.get("/", (req, res) => {
