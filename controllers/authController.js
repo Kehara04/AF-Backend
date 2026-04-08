@@ -16,7 +16,7 @@ function signToken(user) {
       email: user.email,
       role: user.role,
     },
-    process.env.SECRET_KEY,
+    process.env.JWT_SECRET_KEY,
     { expiresIn: process.env.TOKEN_EXPIRES_IN || "24h" }
   );
 }
@@ -51,7 +51,7 @@ exports.registerKid = async (req, res) => {
 
     const verifyToken = jwt.sign(
       { email: kid.email },
-      process.env.SECRET_KEY,
+      process.env.JWT_SECRET_KEY,
       { expiresIn: "1h" }
     );
 
@@ -172,7 +172,7 @@ exports.updateMe = async (req, res) => {
 
       const verifyToken = jwt.sign(
         { email: user.email },
-        process.env.SECRET_KEY,
+        process.env.JWT_SECRET_KEY,
         { expiresIn: "1h" }
       );
 
@@ -247,7 +247,7 @@ exports.deleteMe = async (req, res) => {
 exports.verifyEmail = async (req, res) => {
   try {
     const { token } = req.params;
-    const decoded = jwt.verify(token, process.env.SECRET_KEY);
+    const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
 
     const user = await User.findOne({ email: decoded.email });
     if (!user) return res.status(400).json({ message: "Invalid token" });
@@ -273,7 +273,7 @@ exports.forgotPassword = async (req, res) => {
 
     const resetToken = jwt.sign(
       { email: user.email },
-      process.env.SECRET_KEY,
+      process.env.JWT_SECRET_KEY,
       { expiresIn: "1h" }
     );
 
@@ -300,7 +300,7 @@ exports.resetPassword = async (req, res) => {
       return res.status(400).json({ message: "Password is required" });
     }
 
-    const decoded = jwt.verify(token, process.env.SECRET_KEY);
+    const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
 
     const user = await User.findOne({ email: decoded.email }).select("+password");
     if (!user) return res.status(404).json({ message: "User not found" });

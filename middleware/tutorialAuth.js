@@ -4,7 +4,7 @@ function tutorialAuthenticate(req, res, next) {
   const authHeader = req.headers.authorization;
   const devRole = req.headers["x-dev-role"];
   const devUserId = req.headers["x-dev-userid"] || "dev-user";
-  const jwtSecret = process.env.JWT_SECRET_KEY || process.env.JWT_SECRET;
+  const jwtSecret = process.env.JWT_SECRET_KEY || process.env.JWT_SECRET_KEY;
 
   // JWT mode
   if (authHeader && authHeader.startsWith("Bearer ")) {
