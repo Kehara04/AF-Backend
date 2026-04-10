@@ -442,7 +442,7 @@ Steps:
 - Railway automatically installed dependencies and deployed the application.
 - A public backend URL was generated after deployment.
 
-- Backend live URL - https://af-backend-production-79ae.up.railway.app
+- Backend API URL - https://af-backend-production-79ae.up.railway.app
 
 ### Backend Deployment (Railway)
 ![Backend Deployment](/deployment/Railway.png)
