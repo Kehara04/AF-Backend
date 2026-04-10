@@ -152,40 +152,6 @@ Backend/
 ### 1. YouTube Data API
 Used to search educational YouTube videos and attach a selected video to a tutorial.
 
-**Environment variable:**
-```env
-YOUTUBE_API_KEY=your_youtube_api_key
-```
-
-### 2. Gmail SMTP via Nodemailer
-Used for:
-- email verification
-- password reset
-- feedback confirmation
-- badge earned notifications
-- order confirmation emails
-
-**Environment variables:**
-```env
-EMAIL_HOST=smtp.gmail.com
-EMAIL_PORT=587
-EMAIL_USER=your_email@gmail.com
-EMAIL_PASS=your_app_password
-EMAIL_FROM=your_email@gmail.com
-```
-
-### 3. Cloudinary
-Used for storing uploaded images such as:
-- kid profile pictures
-- experiment images
-
-**Environment variables:**
-```env
-CLOUDINARY_CLOUD_NAME=your_cloud_name
-CLOUDINARY_API_KEY=your_cloudinary_api_key
-CLOUDINARY_API_SECRET=your_cloudinary_api_secret
-```
-
 ## Environment Variables
 
 Create a `.env` file inside the `Backend` folder.
@@ -447,31 +413,6 @@ Steps:
 ### Backend Deployment (Railway)
 ![Backend Deployment](/deployment/Railway.png)
 *Backend successfully deployed on Railway*
-
-## Testing Instructions
-
-### Unit Testing
-```bash
-npm test
-```
-
-### Integration Testing
-- Test authentication flow
-- Test protected routes with valid and invalid JWT
-- Test CRUD flows for experiments, tutorials, quizzes, feedback, and orders
-- Test MongoDB writes and reads
-
-### Performance Testing
-- Use Artillery or Postman Runner for load testing
-- Measure response times on key routes such as login, experiments, quizzes, and orders
-
-## Known Gaps to Improve
-
-- Add Swagger or Postman collection link
-- Add automated unit and integration tests
-- Add production deployment screenshots
-- Add rate limiting and stronger validation middleware
-- Serve consistent API response format across all modules
 
 
 ## License
